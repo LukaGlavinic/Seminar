@@ -20,7 +20,7 @@ def check_extracted_features():
     """ element = feat_poisoned_10_trainX[0]
     print("Prvi element značajki od otrovanog skupa za treniranje: " + str(element))
     mark = feat_poisoned_10_trainY[0]
-    print("Prvi element oznaki od otrovanog skupa za treniranje: " + str(mark)) """
+    print("Oznaka prvi elementa od otrovanog skupa za treniranje: " + str(mark)) """
 
 
-#check_extracted_features()
+# check_extracted_features()
