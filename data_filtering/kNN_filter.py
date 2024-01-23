@@ -1,5 +1,7 @@
-from sklearn.neighbors import KNeighborsClassifier
 from collections import Counter
+
+from sklearn.neighbors import KNeighborsClassifier
+
 
 def kNN(features, labels):
     counts = Counter(labels)

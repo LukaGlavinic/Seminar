@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def load_extracted_features(path='C:\\Users\\Luka\\GitHub\\Seminar\\features\\extracted_features.npz', allow_pickle=True):
     data = np.load(path)
     lst = data.files
