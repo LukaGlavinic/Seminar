@@ -22,7 +22,7 @@ lamda = 80 #threshold of relabeling
 
 pred_labels, label_confidence = None, None
 if os.path.exists('pred_lab_conf.pkl'):
-    with open('tuple_file.json', 'r') as file:
+    with open('pred_lab_conf.pkl', 'r') as file:
         loaded_tuple = pickle.load(file)
         pred_labels, label_confidence = loaded_tuple[0], loaded_tuple[1]
 else:

@@ -1,5 +1,3 @@
-import os
-
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 
@@ -15,24 +13,24 @@ def show_confusion_matrix(extracted_features_Y, predictions, indices_of_poisoned
         if pred != extracted_features_Y[i]:
             pred_pois[i] = 1
     
-    confusiom_mat = confusion_matrix(gt_pois, pred_pois)
+    confusion_mat = confusion_matrix(gt_pois, pred_pois)
 
-    plt.imshow(confusiom_mat, cmap=plt.cm.Greens)
+    plt.imshow(confusion_mat, cmap=plt.cm.Greens)
     plt.title("Confusion Matrix")
     plt.colorbar()
 
     plt.xlabel('Predicted poisoned (1 if yes)')
     plt.ylabel('True poisoned (1 if yes)')
 
-    thresh = confusiom_mat.max() / 2.
+    thresh = confusion_mat.max() / 2.
     cm_color = lambda x: "white" if x > thresh else "black"
-    for i in range(len(confusiom_mat)):    
-        for j in range(len(confusiom_mat[i])):
-            percentage = round(confusiom_mat[i, j]/len(predictions) * 100, 2)
-            text = f"{confusiom_mat[i, j]}\n{percentage}%"
-            plt.text(j, i, text, horizontalalignment="center", verticalalignment="center", color=cm_color(confusiom_mat[i, j]))
+    for i in range(len(confusion_mat)):    
+        for j in range(len(confusion_mat[i])):
+            percentage = round(confusion_mat[i, j]/len(predictions) * 100, 2)
+            text = f"{confusion_mat[i, j]}\n{percentage}%"
+            plt.text(j, i, text, horizontalalignment="center", verticalalignment="center", color=cm_color(confusion_mat[i, j]))
             
     if save_path:
         plt.savefig(save_path)
 
-    return confusiom_mat
+    return confusion_mat
