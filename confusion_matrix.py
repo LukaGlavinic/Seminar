@@ -14,6 +14,10 @@ def show_confusion_matrix(extracted_features_Y, predictions, indices_of_poisoned
             pred_pois[i] = 1
     
     confusion_mat = confusion_matrix(gt_pois, pred_pois)
+    # Set values greater than 1 to 1 (for axis 0)
+    confusion_mat[confusion_mat > 0] = 1
+    # Set values greater than 1 to 1 (for axis 1)
+    # confusion_mat[:, confusion_mat.sum(axis=0) > 1] = 0
 
     plt.imshow(confusion_mat, cmap=plt.cm.Greens)
     plt.title("Confusion Matrix")

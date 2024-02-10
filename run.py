@@ -1,5 +1,5 @@
+import json
 import os
-import pickle
 
 from confusion_matrix import show_confusion_matrix
 from data_filtering.kNN_filter import kNN
@@ -21,16 +21,16 @@ lamda = 80 #threshold of relabeling
 #     print(f"Number of labels {str(i)} in labels total: {str(list(extracted_features_Y).count(i))}")
 
 pred_labels, label_confidence = None, None
-if os.path.exists('pred_lab_conf.pkl'):
-    with open('pred_lab_conf.pkl', 'r') as file:
-        loaded_tuple = pickle.load(file)
+if os.path.exists('pred_lab_conf.json'):
+    with open('pred_lab_conf.json', 'r') as file:
+        loaded_tuple = json.load(file)
         pred_labels, label_confidence = loaded_tuple[0], loaded_tuple[1]
 else:
     pred_labels, label_confidence = kNN(extracted_features_X, extracted_features_Y)
     # Save tuple to a file
     pred_lab_conf = (pred_labels, label_confidence)
-    with open('pred_lab_conf.pkl', 'wb') as file:
-        pickle.dump(pred_lab_conf, file)
+    with open('pred_lab_conf.json', 'w') as file:
+        json.dump(pred_lab_conf, file)
 
 # print(pred_labels)
 # print(label_confidence)
