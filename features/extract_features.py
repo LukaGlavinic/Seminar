@@ -18,10 +18,9 @@ def check_extracted_features():
     print("Učitani podaci su s veličinama:", feat_poisoned_10_trainX.shape, " i " , feat_poisoned_10_trainY.shape)
     print("Duljina značajki od otrovanog skupa za treniranje: " + str(len(feat_poisoned_10_trainX)))
     print("Duljina oznaka od otrovanog skupa za treniranje: " + str(len(feat_poisoned_10_trainY)))
-    """ element = feat_poisoned_10_trainX[0]
+    element = feat_poisoned_10_trainX[0]
     print("Prvi element značajki od otrovanog skupa za treniranje: " + str(element))
     mark = feat_poisoned_10_trainY[0]
-    print("Oznaka prvi elementa od otrovanog skupa za treniranje: " + str(mark)) """
-
+    print("Oznaka prvi elementa od otrovanog skupa za treniranje: " + str(mark))
 
 # check_extracted_features()
