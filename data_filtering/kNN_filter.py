@@ -2,6 +2,7 @@ from collections import Counter
 
 from sklearn.neighbors import KNeighborsClassifier
 
+
 class KNN:
 
     def kNN_10(self, features, labels):
