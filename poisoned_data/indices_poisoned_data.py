@@ -1,9 +1,11 @@
 import os
+from pathlib import Path
 
 import torch
 
+PATH_TO_INDECES = Path(__file__).parent / 'cifar10_poisoned_0.1_0_train.pt'
 
-def load_indices_poisoned_data(path='C:\\Users\\Luka\\GitHub\\Seminar\\poisoned_data\\cifar10_poisoned_0.1_0_train.pt'):
+def load_indices_poisoned_data(path=PATH_TO_INDECES):
     indices_poisoned_data = None
     if os.path.exists(path):
         indices_poisoned_data = torch.load(path)

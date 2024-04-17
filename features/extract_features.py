@@ -1,7 +1,10 @@
+from pathlib import Path
+
 import numpy as np
 
+PATH_TO_FEATURES = Path(__file__).parent / 'extracted_features.npz'
 
-def load_extracted_features(path='C:\\Users\\Luka\\GitHub\\Seminar\\features\\extracted_features.npz', allow_pickle=True):
+def load_extracted_features(path=PATH_TO_FEATURES, allow_pickle=True):
     data = np.load(path)
     lst = data.files
     poisoned_10_trainX, poisoned_10_trainY = None, None
