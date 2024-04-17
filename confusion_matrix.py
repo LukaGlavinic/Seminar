@@ -24,7 +24,7 @@ def show_confusion_matrix(extracted_features_Y, predictions, indices_of_poisoned
     plt.title("Confusion Matrix")
     plt.colorbar()
 
-    plt.xlabel('Predicted (poisoned: 1, clean: 0))')
+    plt.xlabel('Predicted (poisoned: 1, clean: 0)')
     plt.ylabel('True (poisoned:1, clean: 0)')
 
     thresh = confusion_mat.max() / 2.
