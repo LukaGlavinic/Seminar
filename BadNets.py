@@ -7,12 +7,16 @@ Reference:
 
 import copy
 
+import matplotlib.pyplot as plt
 import torch
 from PIL import Image
 from torchvision.transforms import Compose
+from pathlib import Path
 from torchvision.transforms import functional as F
 
 from base import *
+
+SAVE_DIR_TRIGGER_EXAMPLE = Path(__file__).parent / 'triggers'
 
 
 class AddTrigger:
@@ -97,7 +101,7 @@ class PoisonedCIFAR10(CIFAR10):
             poisoned_num = len(poisoned_indeces)
             assert poisoned_num >= 0, 'poisoned_num should greater than or equal to zero.'
             self.poisoned_set = frozenset(poisoned_indeces)
-            print("Created poisoned set")
+            print("Created poisoned indeces set")
         else:
             total_num = len(benign_dataset)
             poisoned_num = int(total_num * poisoned_rate)
@@ -202,6 +206,14 @@ class BadNets(Base):
             schedule=schedule,
             seed=seed,
             deterministic=deterministic)
+        
+        img, label = train_dataset[528]
+        img = img.numpy()
+        img = np.transpose(img, (1, 2, 0))
+        plt.title(f"Originalna slika s oznakom {label}")
+        img = (img * 255).astype(np.uint8)
+        plt.imshow(img)
+        plt.savefig(os.path.join(SAVE_DIR_TRIGGER_EXAMPLE, '528th_original_img.png'))
 
         self.poisoned_train_dataset = CreatePoisonedDataset(
             train_dataset,
@@ -212,6 +224,14 @@ class BadNets(Base):
             weight,
             poisoned_transform_train_index,
             poisoned_target_transform_index)
+        
+        img, label = self.poisoned_train_dataset.__getitem__(528)
+        img = img.numpy()
+        img = np.transpose(img, (1, 2, 0))
+        plt.title(f"Otrovana slika s ciljanom oznakom {label}")
+        img = (img * 255).astype(np.uint8)
+        plt.imshow(img)
+        plt.savefig(os.path.join(SAVE_DIR_TRIGGER_EXAMPLE, '528th_poisoned_img.png'))
 
         self.poisoned_test_dataset = CreatePoisonedDataset(
             test_dataset,
