@@ -15,16 +15,16 @@ class KNN:
             dict_kNeighfitted[label] = kNeig_i
 
         pred_labels = []
-        label_confidence = []
+        label_confidences = []
         for i, sample in enumerate(features):
             kNeig = dict_kNeighfitted.get(labels[i])
             predicted_label = kNeig.predict(sample.reshape(1, -1))
             label_conf = kNeig.predict_proba(sample.reshape(1, -1))[0, predicted_label]
             pred_labels.append(predicted_label[0])
-            label_confidence.append(label_conf[0])
-            print(f"Sample with index {str(i)} has predicted label: {str(pred_labels[-1])} with confidence: {str(label_confidence[-1])} and true label of {str(labels[i])}")
+            label_confidences.append(label_conf[0])
+            print(f"Sample with index {str(i)} has predicted label: {str(pred_labels[-1])} with confidence: {str(label_confidences[-1])} and true label of {str(labels[i])}")
         
-        return pred_labels, label_confidence
+        return pred_labels, label_confidences
     
     def kNN_half(self, features, labels):
         # counts = Counter(labels)
