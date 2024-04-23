@@ -13,7 +13,7 @@ from models.resnet import ResNet
 
 
 def train_BadNets_noCleaning(poisoned_indeces):
-    # ========== Set global settings ==========
+    # ========== Set settings ==========
     global_seed = 666
     deterministic = True
     torch.manual_seed(global_seed)
@@ -47,7 +47,7 @@ def train_BadNets_noCleaning(poisoned_indeces):
         # 'CUDA_SELECTED_DEVICES': CUDA_SELECTED_DEVICES,
 
         'benign_training': False,
-        'batch_size': 1024,
+        'batch_size': 128,
         'num_workers': 4,
 
         'lr': 0.1,
@@ -79,5 +79,5 @@ def train_BadNets_noCleaning(poisoned_indeces):
     seed=global_seed,
     deterministic=deterministic
 )
-    badnets.train(schedule)
-    badnets.test(schedule)
+    # badnets.train(schedule)
+    # badnets.test(schedule)
