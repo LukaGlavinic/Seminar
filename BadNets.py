@@ -14,7 +14,7 @@ from torchvision.transforms import Compose
 from pathlib import Path
 from torchvision.transforms import functional as F
 
-from base import *
+from bases import *
 
 SAVE_DIR_TRIGGER_EXAMPLE = Path(__file__).parent / 'triggers'
 
