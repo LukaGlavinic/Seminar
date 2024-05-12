@@ -11,19 +11,19 @@ def separate_data(features, indices, labels):
 
     return features_poisoned, labels_poisoned, features_clean, labels_clean
 
-def filter_and_relabel_data(features, labels, predicted_labels, label_confidences, threshold):
+def filter_and_relabel_data(features, true_labels, predicted_labels, label_confidences, threshold=80):
     clean, bad = [], []
     conf_to_check = []
     
     # FILTERING
     for i, feat in enumerate(features):
-        if predicted_labels[i] == labels[i]:
-            clean.append((feat, labels[i]))
+        if predicted_labels[i] == true_labels[i]:
+            clean.append((feat, true_labels[i]))
         else:
-            bad.append((feat, labels[i]))
+            bad.append((feat, true_labels[i]))
             conf_to_check.append(i)
 
-    print(f"Out of {len(labels)} total, {len(clean)} were filtered as clean and {len(bad)} as bad.")
+    print(f"Out of {len(true_labels)} total, {len(clean)} were filtered as clean and {len(bad)} as bad.")
     bef_relab_bad = len(bad)
 
     # RELABELING

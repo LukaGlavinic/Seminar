@@ -1,7 +1,11 @@
+# import os
+# from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import confusion_matrix
 
+# SAVE_DIR_CONF = Path(__file__).parent / 'conf_matrices'
 
 def show_confusion_matrix(extracted_features_Y, predictions, indices_of_poisoned, save_path=None):
 
@@ -15,17 +19,13 @@ def show_confusion_matrix(extracted_features_Y, predictions, indices_of_poisoned
             pred_pois[i] = 1
     
     confusion_mat = confusion_matrix(gt_pois, pred_pois)
-    # Set values greater than 1 to 1 (for axis 0)
-    # confusion_mat[confusion_mat > 0] = 1
-    # Set values greater than 1 to 1 (for axis 1)
-    # confusion_mat[:, confusion_mat.sum(axis=0) > 1] = 0
 
     plt.imshow(confusion_mat, cmap=plt.cm.Greens)
     plt.title("Confusion Matrix")
     plt.colorbar()
 
-    plt.xlabel('Predicted (poisoned: 1, clean: 0)')
-    plt.ylabel('True (poisoned:1, clean: 0)')
+    plt.xticks([0, 1], ['Predicted clean 0', 'Predicted poisoned 1'])
+    plt.yticks([0, 1], ['Clean 0', 'Poisoned 1'])
 
     thresh = confusion_mat.max() / 2.
     cm_color = lambda x: "white" if x > thresh else "black"
@@ -40,3 +40,9 @@ def show_confusion_matrix(extracted_features_Y, predictions, indices_of_poisoned
         plt.savefig(save_path)
 
     return confusion_mat
+
+# predictions = [1, 2, 3, 4, 5, 6, 4, 8, 9, 0]
+# indices_of_poisoned = [3, 7, 4]
+# ext_f_y = [1, 3, 5, 6, 2, 0, 9, 8, 7, 5]
+# save_path = os.path.join(SAVE_DIR_CONF, 'test_conf_mat')
+# show_confusion_matrix(ext_f_y, predictions, indices_of_poisoned, save_path)
